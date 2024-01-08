@@ -39,10 +39,18 @@ test:
 about:
   home: https://github.com/david-cortes/isotree
   summary: Isolation-Based Outlier Detection, Distance, and NA imputation
+  description: |
+    Fast and multi-threaded implementation of Isolation Forest (a.k.a. iForest) and variations of it such as Extended
+    Isolation Forest (EIF), Split-Criterion iForest (SCiForest), Fair-Cut Forest (FCF), Robust Random-Cut Forest
+    (RRCF), and other customizable variants, aimed at outlier/anomaly detection plus additions for imputation of
+    missing values, distance/similarity calculation between observations, and handling of categorical data.
   license: MIT AND BSD-2-Clause
   license_file:
     - LICENSE
     - src/robinmap/LICENSE
+  license_family: OTHER
+  doc_url: https://isotree.readthedocs.io
+  dev_url: https://github.com/david-cortes/isotree
 
 extra:
   recipe-maintainers:
