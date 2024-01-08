@@ -1,0 +1,49 @@
+{% set name = "isotree" %}
+{% set version = "0.5.24" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: d5cb06ac442f3708aa00221f917cb5d18803c9ec256b5224a1cd08935227c9ed
+
+build:
+  script: {{ PYTHON }} -m pip install . -vv
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
+    - python
+    - cython >=3.0.0
+    - setuptools
+    - wheel
+    - numpy >=1.25
+    - pip
+  run:
+    - python
+    - {{ pin_compatible('numpy') }}
+
+test:
+  imports:
+    - isotree
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://github.com/david-cortes/isotree
+  summary: Isolation-Based Outlier Detection, Distance, and NA imputation
+  license: MIT AND BSD-2-Clause
+  license_file:
+    - LICENSE
+    - src/robinmap/LICENSE
+
+extra:
+  recipe-maintainers:
+    - boldorider4
