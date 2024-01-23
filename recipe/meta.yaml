@@ -31,6 +31,7 @@ requirements:
     - wheel
     - numpy {{numpy}}
     - cython >=3.0.0
+    - tsl_robin_map
   run:
     - python
     - {{ pin_compatible('numpy') }}
