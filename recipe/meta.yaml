@@ -37,8 +37,6 @@ requirements:
     - {{ pin_compatible('numpy') }}
     - pandas >=0.24.0
     - scipy
-    - intel-openmp  # [not osx and blas_impl == 'mkl']
-    - llvm-openmp   # [osx]
 
 test:
   imports:
