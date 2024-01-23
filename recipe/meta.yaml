@@ -10,7 +10,7 @@ source:
   sha256: d5cb06ac442f3708aa00221f917cb5d18803c9ec256b5224a1cd08935227c9ed
   patches:
     - patches/0001-disable-xoshiro.patch
-    # - patches/0002-add-unvendored-tsl_robin_map.patch
+    - patches/0002-add-unvendored-tsl_robin_map.patch
 
 build:
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
