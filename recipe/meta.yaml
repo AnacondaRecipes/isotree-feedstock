@@ -8,6 +8,9 @@ package:
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: d5cb06ac442f3708aa00221f917cb5d18803c9ec256b5224a1cd08935227c9ed
+  patches:
+    - patches/0001-disable-xoshiro.patch
+    # - patches/0002-add-unvendored-tsl_robin_map.patch
 
 build:
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
@@ -17,16 +20,24 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - intel-openmp  # [not osx and blas_impl == 'mkl']
+    - llvm-openmp   # [osx]
+    - patch         # [not win]
+    - m2-patch      # [win]
   host:
     - python
-    - cython >=3.0.0
+    - pip
     - setuptools
     - wheel
-    - numpy >=1.25
-    - pip
+    - numpy {{numpy}}
+    - cython >=3.0.0
   run:
     - python
     - {{ pin_compatible('numpy') }}
+    - pandas >=0.24.0
+    - scipy
+    - intel-openmp  # [not osx and blas_impl == 'mkl']
+    - llvm-openmp   # [osx]
 
 test:
   imports:
