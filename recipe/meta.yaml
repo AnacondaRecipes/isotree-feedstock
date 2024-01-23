@@ -23,7 +23,6 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - intel-openmp  # [not osx and blas_impl == 'mkl']
     - llvm-openmp   # [osx]
     - patch         # [not win]
     - m2-patch      # [win]
