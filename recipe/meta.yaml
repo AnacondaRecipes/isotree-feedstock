@@ -37,6 +37,7 @@ requirements:
     - {{ pin_compatible('numpy') }}
     - pandas >=0.24.0
     - scipy
+    - _openmp_mutex  # [linux]
 
 test:
   imports:
