@@ -15,15 +15,14 @@ source:
 build:
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   number: 0
-  missing_dso_whitelist:
-    - '*/libc++.1.dylib'  # [osx]
-    - '*/libomp.dylib'    # [osx]
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    # openmp: for win, see the conda_build_config.yaml
     - llvm-openmp   # [osx]
+    - libgomp       # [linux]
     - patch         # [not win]
     - m2-patch      # [win]
   host:
