@@ -1,0 +1,38 @@
+From 0016308364d317b54413bfee9653f48372249916 Mon Sep 17 00:00:00 2001
+From: Lorenzo Pirritano <lpirritano@anaconda.com>
+Date: Mon, 22 Jan 2024 21:17:31 -0600
+Subject: [PATCH] add unvendored tsl_robin_map
+
+There is an embedded version of https://github.com/Tessil/robin-map/tree/d37a41003bfbc7e12e34601f93c18ca2ff6d7c07
+that is used by default. 
+
+https://github.com/david-cortes/isotree/blob/master/setup.py#L73-L73. 
+
+We unvendor it.
+
+See also conda-forge/tsl_robin_map-feedstock.
+
+We need to compile isotree with -D_USE_SYSTEM_ROBIN as shown in
+https://github.com/david-cortes/isotree/blob/master/CMakeLists.txt#L117.
+
+---
+ setup.py | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/setup.py b/setup.py
+index 9b14e00..372d631 100644
+--- a/setup.py
++++ b/setup.py
+@@ -330,7 +330,8 @@ setup(
+                                 include_dirs=[np.get_include(), ".", "./src"],
+                                 language="c++",
+                                 install_requires = ["numpy", "pandas>=0.24.0", "cython", "scipy"],
+-                                define_macros = [("NDEBUG", None),
++                                define_macros = [("_USE_SYSTEM_ROBIN", None),
++                                                 ("NDEBUG", None),
+                                                  ("_FOR_PYTHON", None),
+                                                  ("CYTHON_EXTERN_C", 'extern "C"'),
+                                                  ("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")]
+-- 
+2.39.1
+
