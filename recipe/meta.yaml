@@ -15,15 +15,12 @@ source:
 build:
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   number: 0
-  missing_dso_whitelist:
-    - '*/libc++.1.dylib'  # [osx]
-    - '*/libomp.dylib'    # [osx]
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    # openmp: for win, see the conda_build_config.yaml
+    # openmp for win: see the conda_build_config.yaml
     - llvm-openmp   # [osx]
     - libgomp       # [linux]
     - patch         # [not win]
@@ -41,6 +38,12 @@ requirements:
     - {{ pin_compatible('numpy') }}
     - pandas >=0.24.0
     - scipy
+    # To stop the compiler pulling in an openmp implementation itself
+    # and prevent mixup with conda-forge's toolchain
+    - _openmp_mutex                   # [linux]
+    # openmp for win: see the conda_build_config.yaml
+    - llvm-openmp   # [osx]
+    - libgomp       # [linux]
 
 test:
   imports:
