@@ -35,6 +35,7 @@ requirements:
     - pip
     - setuptools
     - wheel
+    - libgomp       # [linux]
     - numpy {{numpy}}
     - cython >=3.0.0
     - tsl_robin_map
