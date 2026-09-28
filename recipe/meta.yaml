@@ -14,7 +14,7 @@ source:
 
 build:
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
-  number: 0
+  number: 1
   missing_dso_whitelist:
   # libc++.1 and libomp are not found by conda-build for some reason
   # but I did verify that they were there and that they were imported
@@ -24,13 +24,12 @@ build:
 
 requirements:
   build:
+    - {{ stdlib('c') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     # openmp for win: see the conda_build_config.yaml
     - llvm-openmp   # [osx]
     - libgomp       # [linux]
-    - patch         # [not win]
-    - m2-patch      # [win]
   host:
     - python
     - pip
